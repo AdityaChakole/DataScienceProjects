@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Ticket SLA Prediction</h1>
+
+    
+    <form action="{{ url_for('predict')}}"method="post">
+    <br>
+    	<label for="Type">Type</label>
+    <select id="Type" name="Type">
+     <option value="0">Demo request</option>
+<option value="1">FYI</option>
+<option value="2">Feature request</option>
+<option value="3">Issues</option>
+<option value="4">Misconfiguration</option>
+<option value="5">Others</option>
+<option value="6">Service request</option>
+    </select>
+
+<br>
+    <label for="Priority">Priority</label>
+    <select id="Priority" name="Priority">
+      <option value="0">High</option>
+<option value="1">Low</option>
+<option value="2">Medium</option>
+<option value="3">Urgent</option>
+    </select>
+    <br>
+<br>
+    <label for="Agent">Agent</label>
+    <select id="Agent" name="Agent">
+      <option value="0">Harsha V</option>
+<option value="1">Manav Bali</option>
+<option value="2">Mayank Pathak</option>
+<option value="3">Mohammed Zaid</option>
+<option value="4">Mukul Vijay Ghare</option>
+<option value="5">No Agent</option>
+<option value="6">Prachi Sharma</option>
+<option value="7">Pranav Ralhan</option>
+<option value="8">Roja K</option>
+<option value="9">Sayika Dey</option>
+<option value="10">Sonal Agarwal</option>
+<option value="11">Sonal Bisht</option>
+<option value="12">Sonali Deb Roy</option>
+<option value="13">Tech Support Team</option>
+    </select>
+    <br>
+<br>
+    <label for="Group">Group</label>
+    <select id="Group" name="Group">
+      <option value="0">Call Support Team</option>
+<option value="1">Customer Experience</option>
+<option value="2">Firefighters—L1</option>
+<option value="3">Firefighters—L2</option>
+<option value="4">No Group</option>
+    </select>
+    <br>
+<br>
+    <label for="Product">Product</label>
+    <select id="Product" name="Product">
+      <option value="0">Comet</option>
+<option value="1">Hub</option>
+<option value="2">Meraki</option>
+<option value="3">Others</option>
+<option value="4">Prime</option>
+<option value="5">Prime POS</option>
+    </select>
+    <br>
+<br>
+    <label for="Module">Module</label>
+    <select id="Module" name="Module">
+      <option value="0">Catalogue Config Request</option>
+<option value="1">Charges</option>
+<option value="2">Demo Request</option>
+<option value="3">Store Availability</option>
+<option value="4">Taxes</option>
+<option value="5">User Account</option>
+    </select>
+    <br>
+<br>
+    <label for="Merchant">Merchant</label>
+    <select id="Merchant" name="Merchant">
+      <option value="0">1 gram Jewellery</option>
+<option value="1">A'la Liberty</option>
+<option value="2">Alampur Restaurant</option>
+<option value="3">Almaza</option>
+<option value="4">Ambrosia</option>
+<option value="5">Aminia Restaurant</option>
+<option value="6">Aminos</option>
+<option value="7">Anand Bhawan Sweets OMS</option>
+<option value="8">Annapurna Bhojnalya</option>
+<option value="9">Aroma's Hyderabad House</option>
+<option value="10">Asian Wok</option>
+<option value="11">Badshah Cakes</option>
+<option value="12">Bangalore Mandarin</option>
+<option value="13">Barbeque Nation</option>
+<option value="14">Bekal</option>
+<option value="15">Bengal Sweet Corner</option>
+<option value="16">Bengaluru Box</option>
+<option value="17">Bier Library</option>
+<option value="18">Big Pitcher</option>
+<option value="19">Bikanervala</option>
+<option value="20">Bikanervala hub</option>
+<option value="21">Biryani Blues</option>
+<option value="22">Biryani by Kilo</option>
+<option value="23">Blr Brewing Co</option>
+<option value="24">Bombay kulfis</option>
+<option value="25">Breakfast in the box</option>
+<option value="26">Brik Oven</option>
+<option value="27">Brindhavan Vegetarian Restaurant</option>
+<option value="28">Burgers n Shakers</option>
+<option value="29">Buyfish</option>
+<option value="30">Cafe Durga</option>
+<option value="31">Cafe Nutrithink</option>
+<option value="32">Cake Zone</option>
+<option value="33">Cake express</option>
+<option value="34">Cake l'amore</option>
+<option value="35">Cakesden</option>
+<option value="36">California Burrito - Thalaivars Biryani</option>
+<option value="37">California burrito</option>
+<option value="38">Call Chotu- Yours Truly Butter Chicken- Naye Dilli Ke Paranthe</option>
+<option value="39">Chai Truck (swiggy access)</option>
+<option value="40">Chai break</option>
+<option value="41">Chai point</option>
+<option value="42">Chaikings</option>
+<option value="43">Changezi Chicken</option>
+<option value="44">Chapter 24</option>
+<option value="45">Chef Bakers</option>
+<option value="46">Chilis</option>
+<option value="47">City Tea Junction</option>
+<option value="48">Confusion Box</option>
+<option value="49">Copacetic cuisine</option>
+<option value="50">Costa Coffee</option>
+<option value="51">Creme N Crisp</option>
+<option value="52">Da Captain Chicken</option>
+<option value="53">Da Pizza Palace</option>
+<option value="54">Daily sushi</option>
+<option value="55">Delishkart</option>
+<option value="56">Ding Chinese</option>
+<option value="57">Dough & Cream</option>
+<option value="58">Dragon Dray</option>
+<option value="59">Drunken Monkey</option>
+<option value="60">Dunkin Donuts</option>
+<option value="61">Eat Fit</option>
+<option value="62">Fahrenheit 375°</option>
+<option value="63">Fat Lulus</option>
+<option value="64">Feel Good Biryani</option>
+<option value="65">Gangotri (HUB)</option>
+<option value="66">Gillys - Kitchens Of Punjab</option>
+<option value="67">Girnar Restaurant</option>
+<option value="68">Glades Hotel</option>
+<option value="69">GoodDot Foods Pvt. Ltd</option>
+<option value="70">Gourmet Kitchen</option>
+<option value="71">Haiking</option>
+<option value="72">Haji Ali Fresh Fruit Juices</option>
+<option value="73">Haldiram</option>
+<option value="74">Hanglas</option>
+<option value="75">Havmor Restaurant</option>
+<option value="76">Heavens Park</option>
+<option value="77">Homely Foods</option>
+<option value="78">Honey & Dough</option>
+<option value="79">ITC Hotels</option>
+<option value="80">Ikura</option>
+<option value="81">IntelliFoods</option>
+<option value="82">Jarlie</option>
+<option value="83">Jashn-e-biryani (wok)</option>
+<option value="84">Jebal Al Atlas - UAE</option>
+<option value="85">Jujube Asian Cookhouse</option>
+<option value="86">Kaaram-The Andhra Kitchen</option>
+<option value="87">Kabuliwala</option>
+<option value="88">Kaleva</option>
+<option value="89">Kanti Sweets</option>
+<option value="90">Kenz Karam</option>
+<option value="91">Keventers</option>
+<option value="92">Kytchens</option>
+<option value="93">Layerbite</option>
+<option value="94">Le 15 Patisserie</option>
+<option value="95">Le Plaisir</option>
+<option value="96">Le15 Patisserie</option>
+<option value="97">Let's Meat</option>
+<option value="98">Life fresh store</option>
+<option value="99">Little Italy UAE</option>
+<option value="100">Maakhan Bhog</option>
+<option value="101">Maggiwala</option>
+<option value="102">Magnolia Bakery</option>
+<option value="103">Mainland China- Speciality kitchen</option>
+<option value="104">Maiz Hospitality Pvt. Ltd</option>
+<option value="105">Mani's</option>
+<option value="106">Manohar Dairy</option>
+<option value="107">Maverix - Canteen Central</option>
+<option value="108">Maverix - Great India Khichdi</option>
+<option value="109">Maverix - Home plate by Canteen Central</option>
+<option value="110">Maverix - Meal Studio</option>
+<option value="111">McDonalds</option>
+<option value="112">Meamo</option>
+<option value="113">Meatigo</option>
+<option value="114">Melting Point</option>
+<option value="115">Mezbaan</option>
+<option value="116">Midland China</option>
+<option value="117">Mithaas</option>
+<option value="118">Mkop</option>
+<option value="119">Mondelice Cakes</option>
+<option value="120">Must Eat,Eat Some,Burger Jack's, Crazy Oven Pizza,Momo Jacks</option>
+<option value="121">NDH Hospitality Service</option>
+<option value="122">Nandus</option>
+<option value="123">Nathus</option>
+<option value="124">Nathus Sweets</option>
+<option value="125">Neat Meat</option>
+<option value="126">New Krazy Kitchen</option>
+<option value="127">Nirula's</option>
+<option value="128">Noodle 2 Home</option>
+<option value="129">Oh Burger</option>
+<option value="130">Om sweets</option>
+<option value="131">Oriental Mom</option>
+<option value="132">Others</option>
+<option value="133">Ovenfresh</option>
+<option value="134">Papacream</option>
+<option value="135">Paradise Food Court</option>
+<option value="136">Parantha Express</option>
+<option value="137">Pebble street</option>
+<option value="138">Pick me foods- chatpata restaurant</option>
+<option value="139">Pind punjabi dhaba</option>
+<option value="140">Pizza Street, Pizza Vista, Pizza Slice, Pizzas and Wings</option>
+<option value="141">PoS</option>
+<option value="142">Pot belly</option>
+<option value="143">Potful</option>
+<option value="144">Prashant Corner</option>
+<option value="145">Proem Hospitality</option>
+<option value="146">Punjab Paltan</option>
+<option value="147">Quikish</option>
+<option value="148">Red Rhino</option>
+<option value="149">Roti N Boti</option>
+<option value="150">SGF</option>
+<option value="151">Sagar family restaurant</option>
+<option value="152">Samosa Party</option>
+<option value="153">Samosa Singh</option>
+<option value="154">Sangam Sweets</option>
+<option value="155">Saravana Bhavan Restaurant</option>
+<option value="156">Seher Saanjh [Vdeliver.Online]</option>
+<option value="157">Shake Studio</option>
+<option value="158">Sharief Bhai</option>
+<option value="159">Shree Mithai</option>
+<option value="160">Shreenath</option>
+<option value="161">Snack house</option>
+<option value="162">Spice Market</option>
+<option value="163">Srinidhi Veg Food Court</option>
+<option value="164">Subway (devyani)</option>
+<option value="165">Subway - GCC</option>
+<option value="166">Subway - LAC</option>
+<option value="167">Subway - SEA</option>
+<option value="168">Surprise India</option>
+<option value="169">Suruchi Foods</option>
+<option value="170">Sweet Bengal</option>
+<option value="171">Tandoor Box</option>
+<option value="172">Tatacha</option>
+<option value="173">The Art of Pizza</option>
+<option value="174">The Bier Library</option>
+<option value="175">The Filter Coffee</option>
+<option value="176">The Good Stuff</option>
+<option value="177">The Invitation 365</option>
+<option value="178">The Oven Classics</option>
+<option value="179">The Yellow Taxi & PaPa TJ</option>
+<option value="180">The cherry tree</option>
+<option value="181">The knight rider, Dilli Dhaba, Zafran Kitchen</option>
+<option value="182">The minimalist Foodiee</option>
+<option value="183">Third wave coffee roasters</option>
+<option value="184">Troho</option>
+<option value="185">Ubq</option>
+<option value="186">Udupi Grand</option>
+<option value="187">Uncle Jack's</option>
+<option value="188">Urban Chic</option>
+<option value="189">VSK Hospitality</option>
+<option value="190">Vaango</option>
+<option value="191">Vaishnavi Litti Bhandar, Bihari chicken litti</option>
+<option value="192">Vdesi Kitchen & Cafe, Firangi Bites, Giani Ice Cream</option>
+<option value="193">Veg Gulati</option>
+<option value="194">What A Sandwich</option>
+<option value="195">Whatta Waffle!</option>
+<option value="196">Wholefoods</option>
+<option value="197">Wok Express</option>
+<option value="198">Wok on wheels</option>
+<option value="199">Wow China</option>
+<option value="200">Wow Momo</option>
+<option value="201">Zaatar Arabic restaurant</option>
+<option value="202">Zing</option>
+<option value="203">Zorabian</option>
+<option value="204">aab</option>
+<option value="205">all dough bakers</option>
+<option value="206">anand sweets</option>
+<option value="207">autumn leaf cafe</option>
+<option value="208">badami's</option>
+<option value="209">bakingo</option>
+<option value="210">barbeque nation</option>
+<option value="211">barista</option>
+<option value="212">baskin robbins</option>
+<option value="213">biggies burger</option>
+<option value="214">bikanervala</option>
+<option value="215">bikanervala hub</option>
+<option value="216">biryani by kilo</option>
+<option value="217">biryani culture</option>
+<option value="218">bohemian hospitality</option>
+<option value="219">box8 - desi meals</option>
+<option value="220">breakfast in the box</option>
+<option value="221">burger farm</option>
+<option value="222">burger in law</option>
+<option value="223">cafe coffee day</option>
+<option value="224">cake corner</option>
+<option value="225">cake l'amore</option>
+<option value="226">cake zone</option>
+<option value="227">cakes n bakes</option>
+<option value="228">cakes11</option>
+<option value="229">california burrito</option>
+<option value="230">cambay tiger</option>
+<option value="231">captain sam's pizza</option>
+<option value="232">ccd</option>
+<option value="233">ceylon bake house</option>
+<option value="234">chai break</option>
+<option value="235">chai truck (swiggy access)</option>
+<option value="236">chaikings</option>
+<option value="237">chickpet donne biryani house</option>
+<option value="238">circle of crust</option>
+<option value="239">clover</option>
+<option value="240">costa coffee</option>
+<option value="241">crave eatables</option>
+<option value="242">culex hospitality</option>
+<option value="243">da captain chicken</option>
+<option value="244">da pizza palace</option>
+<option value="245">delishkart</option>
+<option value="246">dhaba by amber</option>
+<option value="247">drunken monkey</option>
+<option value="248">dumont</option>
+<option value="249">eggsplode</option>
+<option value="250">emeat</option>
+<option value="251">empire restaurant</option>
+<option value="252">entisi chocolatier</option>
+<option value="253">fat lulus</option>
+<option value="254">fb cakes and sweets</option>
+<option value="255">feedx</option>
+<option value="256">feel good biryani</option>
+<option value="257">fi mu chi</option>
+<option value="258">flax healthy living</option>
+<option value="259">flying organic</option>
+<option value="260">ganguram</option>
+<option value="261">gills punjabi khana</option>
+<option value="262">good fettle pvt ltd (mentor)</option>
+<option value="263">gopizza</option>
+<option value="264">gulab sweets and restaurant</option>
+<option value="265">gulabwala</option>
+<option value="266">haldiram</option>
+<option value="267">happy belly bakes</option>
+<option value="268">happy zones</option>
+<option value="269">hard rock cafe</option>
+<option value="270">hari super sandwich</option>
+<option value="271">harish bakers and confectioners</option>
+<option value="272">hundo pizza</option>
+<option value="273">hyggee</option>
+<option value="274">indian grill room</option>
+<option value="275">instapizza</option>
+<option value="276">japfa best</option>
+<option value="277">kabuliwala</option>
+<option value="278">kaleva</option>
+<option value="279">karachi sweet mart</option>
+<option value="280">kathi on the go (swiggy access)</option>
+<option value="281">keventers</option>
+<option value="282">kitchens@</option>
+<option value="283">knight bite</option>
+<option value="284">kota kachori</option>
+<option value="285">kouzina food tech pvt ltd</option>
+<option value="286">krishnatunga</option>
+<option value="287">kwality wall's(kws)</option>
+<option value="288">la casa gelato</option>
+<option value="289">la cucina</option>
+<option value="290">laxmi misthan bhandar</option>
+<option value="291">layerbite</option>
+<option value="292">little italy nagpur</option>
+<option value="293">lulu's</option>
+<option value="294">l’instant café</option>
+<option value="295">mainland china- speciality kitchen</option>
+<option value="296">malabar bay</option>
+<option value="297">maverick food klub</option>
+<option value="298">mealful wraps</option>
+<option value="299">meat & eat</option>
+<option value="300">meatigo</option>
+<option value="301">nandhana express</option>
+<option value="302">nando's</option>
+<option value="303">nasi and mee</option>
+<option value="304">nathus chattarpur</option>
+<option value="305">nathus sweets</option>
+<option value="306">natural ice creams mow</option>
+<option value="307">neat meat</option>
+<option value="308">new bombay sweets and snacks</option>
+<option value="309">nic naturals</option>
+<option value="310">oh deli</option>
+<option value="311">om sweets</option>
+<option value="312">oriental express</option>
+<option value="313">oriental mom</option>
+<option value="314">ovenfresh</option>
+<option value="315">oye kiddan</option>
+<option value="316">palamuru pakodi</option>
+<option value="317">palmshore</option>
+<option value="318">papa bison</option>
+<option value="319">paradise</option>
+<option value="320">paradise food court</option>
+<option value="321">parantha express</option>
+<option value="322">paratha box</option>
+<option value="323">paris panini</option>
+<option value="324">pick me foods- chatpata restaurant</option>
+<option value="325">pind balluchi</option>
+<option value="326">pizza express</option>
+<option value="327">pizza hut</option>
+<option value="328">pizza wings</option>
+<option value="329">polar bear</option>
+<option value="330">proem hospitality</option>
+<option value="331">purani dilli se</option>
+<option value="332">quikish</option>
+<option value="333">rangla punjab</option>
+<option value="334">roll call</option>
+<option value="335">sandwich express</option>
+<option value="336">sethi restaurant</option>
+<option value="337">shake studio</option>
+<option value="338">sharief bhai</option>
+<option value="339">shekaza restaurant</option>
+<option value="340">shiro</option>
+<option value="341">shree mahalakshmi sweets</option>
+<option value="342">skitch</option>
+<option value="343">skynest</option>
+<option value="344">slv finedine</option>
+<option value="345">snack house</option>
+<option value="346">spice market</option>
+<option value="347">spicy mango</option>
+<option value="348">sree annapoorna</option>
+<option value="349">stiksof icecream</option>
+<option value="350">swiggy</option>
+<option value="351">taco bell</option>
+<option value="352">thaal kitchen</option>
+<option value="353">the art cafe</option>
+<option value="354">the brooklyn creamery</option>
+<option value="355">the meat stop</option>
+<option value="356">the modak</option>
+<option value="357">the north veg</option>
+<option value="358">the pink elephant- milk N more</option>
+<option value="359">the pizza bakery</option>
+<option value="360">the pump house</option>
+<option value="361">the tea brewery</option>
+<option value="362">third wave coffee roasters</option>
+<option value="363">toscano</option>
+<option value="364">twist of italy</option>
+<option value="365">ubq</option>
+<option value="366">uncle jack's</option>
+<option value="367">uncle nonu</option>
+<option value="368">vaango</option>
+<option value="369">venkys chicken xperiance</option>
+<option value="370">voosh</option>
+<option value="371">wagh bakri tea lounges</option>
+<option value="372">wow china</option>
+<option value="373">wow momo</option>
+<option value="374">yati foods</option>
+<option value="375">zfw consulting pvt ltd</option>
+<option value="376">zomato</option>
+<option value="377">zorabian</option>
+    </select>
+    <br>
+<br>
+    <label for="Resolution Dependency">Resolution Dependency</label>
+    <select id="Resolution Dependency" name="Resolution Dependency">
+      <option value="0">Account Management</option>
+<option value="1">Finance</option>
+<option value="2">Integrations</option>
+<option value="3">L1 Support</option>
+<option value="4">L2 Support</option>
+<option value="5">On-boarding</option>
+<option value="6">Product Specialist</option>
+<option value="7">Program Management</option>
+<option value="8">Sales</option>
+    </select>
+    <br>
+
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
